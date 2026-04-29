@@ -176,6 +176,7 @@
             // 
             // tabPageInstellingen
             // 
+            this.tabPageInstellingen.BackColor = System.Drawing.Color.Cornsilk;
             this.tabPageInstellingen.Controls.Add(this.checkBoxDtrEnable);
             this.tabPageInstellingen.Controls.Add(this.checkBoxRtsEnable);
             this.tabPageInstellingen.Controls.Add(this.label8);
@@ -195,7 +196,6 @@
             this.tabPageInstellingen.Size = new System.Drawing.Size(1552, 755);
             this.tabPageInstellingen.TabIndex = 2;
             this.tabPageInstellingen.Text = "Instellingen";
-            this.tabPageInstellingen.UseVisualStyleBackColor = true;
             // 
             // checkBoxDtrEnable
             // 
@@ -864,6 +864,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1616, 952);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
