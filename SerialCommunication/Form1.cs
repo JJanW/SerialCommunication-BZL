@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
@@ -123,7 +124,71 @@ namespace SerialCommunication
 
         }
 
+        private void checkBoxDigital2_CheckedChanged(object sender, EventArgs e)
+        {
+            //DIGITALE UITGANG 2 AANGEVINKT
+            try  
+            {
+                if (serialPortArduino.IsOpen)
+                {   string commando; //set d2 high/low
+                    if (checkBoxDigital2.Checked) commando = "set d2 high";
+                    else commando = "set d2 low";
+                    serialPortArduino.WriteLine (commando);
+                }
+            }
 
+            catch (Exception uitzondering)
+            {
+                labelStatus.Text = "Error: " + uitzondering.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+        }
 
+        private void checkBoxDigital3_CheckedChanged(object sender, EventArgs e)
+        {//DIGITALE UITGANG 3 AANGEVINKT
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string commando; //set d3 high/low
+                    if (checkBoxDigital3.Checked) commando = "set d3 high";
+                    else commando = "set d3 low";
+                    serialPortArduino.WriteLine(commando);
+                }
+            }
+
+            catch (Exception uitzondering)
+            {
+                labelStatus.Text = "Error: " + uitzondering.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+
+        }
+
+        private void checkBoxDigital4_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string commando; //set d4 high/low
+                    if (checkBoxDigital4.Checked) commando = "set d4 high";
+                    else commando = "set d4 low";
+                    serialPortArduino.WriteLine(commando);
+                }
+            }
+
+            catch (Exception uitzondering)
+            {
+                labelStatus.Text = "Error: " + uitzondering.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+        }
     }
 }
