@@ -107,14 +107,19 @@ namespace SerialCommunication
                         buttonConnect.Text = "Disconnect";
                         labelStatus.Text = "Status: connected";
                     }
-                    else { serialPortArduino.Close(); labelStatus.Text = "Error: verkeerd antwoord"; }
+                    else { serialPortArduino.Close(); labelStatus.Text = "Error: verkeerd antwoord"; } //als de arduino niet antwoord
 
 
                 }  
 
 
             }
-            catch (Exception uitzondering) { labelStatus.Text = "Error: " + uitzondering.Message; }
+            catch (Exception uitzondering) 
+            { labelStatus.Text = "Error: " + uitzondering.Message; 
+                serialPortArduino.Close () ;
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
 
         }
 
