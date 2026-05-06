@@ -247,5 +247,6 @@ namespace SerialCommunication
                 buttonConnect.Text = "Connect";
             }
         }
+
     }
 }
