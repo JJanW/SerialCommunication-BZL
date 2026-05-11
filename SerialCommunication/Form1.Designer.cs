@@ -748,6 +748,7 @@
             this.radioButtonDigital5.TabStop = true;
             this.radioButtonDigital5.Text = "Digital 5";
             this.radioButtonDigital5.UseVisualStyleBackColor = true;
+            this.radioButtonDigital5.CheckedChanged += new System.EventHandler(this.radioButtonDigital5_CheckedChanged);
             // 
             // pictureBox3
             // 
@@ -887,10 +888,6 @@
             // 
             this.serialPortArduino.ReadTimeout = 1000;
             this.serialPortArduino.WriteTimeout = 1000;
-            // 
-            // timer1
-            // 
-            //this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 

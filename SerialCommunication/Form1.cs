@@ -170,7 +170,7 @@ namespace SerialCommunication
         }
 
         private void checkBoxDigital4_CheckedChanged(object sender, EventArgs e)
-        {
+        {// DIGITALE UITGANG 4 AANGEVINKT
             try
             {
                 if (serialPortArduino.IsOpen)
@@ -248,5 +248,9 @@ namespace SerialCommunication
             }
         }
 
+        private void radioButtonDigital5_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
