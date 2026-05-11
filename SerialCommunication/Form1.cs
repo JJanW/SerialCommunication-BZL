@@ -248,8 +248,87 @@ namespace SerialCommunication
             }
         }
 
-        private void radioButtonDigital5_CheckedChanged(object sender, EventArgs e)
+        //OEFENING 3
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            timerOefening3.Enabled = tabControl.SelectedIndex == 3;
+            timerOefening4.Enabled = tabControl.SelectedIndex == 4; 
+        }
+
+        private void timerOefening3_Tick(object sender, EventArgs e)
+        {
+            try 
+            { if (serialPortArduino.IsOpen)
+                {
+                    serialPortArduino.ReadExisting();
+                    string commando = "get d5"; //probeer digitale ingang 5
+                    serialPortArduino.WriteLine(commando);
+                    string antwoord = serialPortArduino.ReadLine();
+                    antwoord = antwoord.Trim();
+                    antwoord = antwoord.Substring(4);
+
+                    radioButtonDigital5.Checked = (antwoord == "1");
+
+
+                    //digitale poort 6
+                    serialPortArduino.ReadExisting();
+                    string commandod6 = "get d6"; //probeer digitale ingang 6
+                    serialPortArduino.WriteLine(commandod6);
+                    string antwoordd6 = serialPortArduino.ReadLine();
+                    antwoordd6 = antwoordd6.Trim();
+                    antwoordd6 = antwoordd6.Substring(4);
+
+                    radioButtonDigital6.Checked = (antwoordd6 == "1");
+
+                    //digitale poort 7
+                    serialPortArduino.ReadExisting();
+                    string commandod7 = "get d7"; //probeer digitale ingang 7
+                    serialPortArduino.WriteLine(commandod7);
+                    string antwoordd7 = serialPortArduino.ReadLine();
+                    antwoordd7 = antwoordd7.Trim();
+                    antwoordd7 = antwoordd7.Substring(4);
+
+                    radioButtonDigital7.Checked = (antwoordd7 == "1");
+                }
+            }
+
+            catch (Exception uitzondering)
+            {
+                labelStatus.Text = "Error: " + uitzondering.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+        }
+        
+        //OEFENING 4
+
+        private void timerOefening4_Tick(object sender, EventArgs e)
+        {
+
+            try
+            { if (serialPortArduino.IsOpen)
+                  serialPortArduino.ReadExisting();
+                  string commando = "get a0"; //probeer analogoe ingang 0
+                  serialPortArduino.WriteLine(commando);
+                  string antwoord = serialPortArduino.ReadLine();
+                  antwoord = antwoord.Trim();
+                  antwoord = antwoord.Substring(4);
+                labelAnalog0.Text = antwoord;
+                      
+
+            }
+
+
+            catch (Exception uitzondering)
+            {
+                labelStatus.Text = "Error: " + uitzondering.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+
+
 
         }
     }
