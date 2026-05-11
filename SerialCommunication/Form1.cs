@@ -366,7 +366,21 @@ namespace SerialCommunication
                 antwoordTempSensor = antwoordTempSensor.Substring(4);
 
                 //omzetten van waarde sensor naar temperatuurschaal
-                
+                int waardeTempSensor = Int32.Parse(antwoordTempSensor);
+
+                //omzetten van sensor naar temperatuurschaal
+                double huidigeTemp = (0.48875855* waardeTempSensor);
+                huidigeTemp = Math.Round(huidigeTemp,1, MidpointRounding.AwayFromZero);
+
+                labelHuidigeTemp.Text = huidigeTemp.ToString();
+
+                //led aansturen
+                string commandoLed; //set d2 high/low
+                if (huidigeTemp < waardeTempSensor) commandoLed = "set d2 high";
+                else commandoLed = "set d2 low";
+                serialPortArduino.WriteLine(commandoLed);
+
+
             }
             
             catch (Exception uitzondering)
