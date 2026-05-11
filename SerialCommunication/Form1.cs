@@ -253,6 +253,7 @@ namespace SerialCommunication
         {
             timerOefening3.Enabled = tabControl.SelectedIndex == 3;
             timerOefening4.Enabled = tabControl.SelectedIndex == 4; 
+            timerOefening5.Enabled = tabControl.SelectedIndex == 5; 
         }
 
         private void timerOefening3_Tick(object sender, EventArgs e)
@@ -329,6 +330,52 @@ namespace SerialCommunication
             }
 
 
+
+        }
+        //OEFENING 5
+        private void timerOefening5_Tick(object sender, EventArgs e)
+        {
+            try 
+            {
+             if (serialPortArduino.IsOpen)
+
+                //Analoge pin A0 = potentiometer voor gewenste temp in te stellen
+                serialPortArduino.ReadExisting();
+                string commando = "get a0"; //probeer analoge ingang 0
+                serialPortArduino.WriteLine(commando);
+                string antwoord = serialPortArduino.ReadLine();
+                antwoord = antwoord.Trim();
+                antwoord = antwoord.Substring(4);
+                labelAnalog0.Text = antwoord;
+
+                //antwoord omzetten naar een getal
+                int waardePotentiometer = Int32.Parse(antwoord);
+
+                //omzetten van potentiometer naar temperatuurschaal
+                double temperatuur = (0.039 * waardePotentiometer) + 5;
+                temperatuur = Math.Round(temperatuur,1, MidpointRounding.AwayFromZero);
+
+                labelGewensteTemp.Text = temperatuur.ToString();
+
+                //LM35 sensor = huidige temperatuur uitlezen
+                serialPortArduino.ReadExisting();
+                string commandoTempSensor = "get a1"; //probeer analoge ingang 1
+                serialPortArduino.WriteLine(commandoTempSensor);
+                string antwoordTempSensor = serialPortArduino.ReadLine();
+                antwoordTempSensor = antwoordTempSensor.Trim();
+                antwoordTempSensor = antwoordTempSensor.Substring(4);
+
+                //omzetten van waarde sensor naar temperatuurschaal
+                
+            }
+            
+            catch (Exception uitzondering)
+            {
+                labelStatus.Text = "Error: " + uitzondering.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
 
         }
     }
