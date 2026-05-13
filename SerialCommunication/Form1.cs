@@ -352,10 +352,10 @@ namespace SerialCommunication
                 int waardePotentiometer = Int32.Parse(antwoord);
 
                 //omzetten van potentiometer naar temperatuurschaal
-                double temperatuur = (0.039 * waardePotentiometer) + 5;
-                temperatuur = Math.Round(temperatuur,1, MidpointRounding.AwayFromZero);
+                double gewensteTemperatuur = (0.039 * waardePotentiometer) + 5;
+                gewensteTemperatuur = Math.Round(gewensteTemperatuur,1, MidpointRounding.AwayFromZero);
 
-                labelGewensteTemp.Text = temperatuur.ToString();
+                labelGewensteTemp.Text = gewensteTemperatuur.ToString();
 
                 //LM35 sensor = huidige temperatuur uitlezen
                 serialPortArduino.ReadExisting();
@@ -376,11 +376,9 @@ namespace SerialCommunication
 
                 //led aansturen
                 string commandoLed; //set d2 high/low
-                if (huidigeTemp < waardeTempSensor) commandoLed = "set d2 high";
+                if (huidigeTemp < gewensteTemperatuur) commandoLed = "set d2 high";
                 else commandoLed = "set d2 low";
                 serialPortArduino.WriteLine(commandoLed);
-
-
             }
             
             catch (Exception uitzondering)
@@ -390,6 +388,11 @@ namespace SerialCommunication
                 radioButtonVerbonden.Checked = false;
                 buttonConnect.Text = "Connect";
             }
+
+            //AANSLUITING BREADBOARD
+            // potentio links VCC, midden A0 input, rechts ground
+            //temp sensor links VCC, midden A1 input, rechts ground
+            // led kort been + R naar ground; lang been naar digital2
 
         }
     }
